@@ -1,4 +1,4 @@
-# MCC1_IFSC_2023_02
+
 **1 – Introdução.**
 
 Neste documento iremos falar sobre o nosso projeto final, que será um Colorímetro com LDR, que nada mais é do que um instrumento que irá realizar algumas análises de algumas substâncias químicas presentes na água.
