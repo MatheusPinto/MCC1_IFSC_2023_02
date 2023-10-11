@@ -8,7 +8,9 @@ Em um cenário onde a conexão com a natureza e a busca por uma vida mais saudá
 
   
 
-Com o crescente aumento da população, espaços e a produção de alimentos, sempre foram fatores de discussão na sociedade, Thomas Malthus elaborou a teoria de com a crescente dessa população em ritmo acelerado iria superar a oferta de alimentos e que isso traria problemas como fome e miséria no futuro, mas o que Malthus não levava e consideração era como seria o avanço tecnológico. Atender a demanda de mercado sobre produtos alimentícios sempre foi o foco das industrias.
+Com o crescente aumento da população, espaços e a produção de alimentos, sempre foram fatores de discussão na sociedade, Thomas Malthus um economista britânico  elaborou a teoria de com a crescente dessa população em ritmo acelerado iria superar a oferta de alimentos e que isso traria problemas como fome e miséria no futuro, mas o que Malthus não levava e consideração era como seria o avanço tecnológico. Atender a demanda de mercado sobre produtos alimentícios sempre foi o foco das industrias.
+
+[referência_Thomas_malthus](https://www.ebiografia.com/thomas_malthus/)
 
   
 
@@ -16,11 +18,11 @@ Esta estufa residencial é projetada com um toque tecnológico. Ela é equipada 
 
   
 
-Os sensores desempenham um papel crucial nesta estufa residencial, garantindo que as plantas recebam a quantidade certa de água e luz. Se a umidade cair abaixo do nível desejado, os sistemas de irrigação automática são ativados para manter o solo úmido. Se a temperatura subir demais em um dia quente de verão, as ventoinhas são ligadas para que possam refrigerar o ambiente. E quando a luz do sol diminui, as luzes internas são ligadas automaticamente para manter o crescimento das plantas.
+Os sensores desempenham um papel crucial nesta estufa residencial, garantindo que as plantas recebam a quantidade certa de água e luz. Se a umidade cair abaixo do nível desejado, os sistemas de irrigação automática são ativados para manter o solo úmido. Se a temperatura subir demais em um dia quente de verão, as ventoinhas são ligadas para que possam refrigerar o ambiente. E quando a luz do sol diminui, as luzes internas são ligadas automaticamente para manter o crescimento das plantas. A estufa poderá ficar em qualquer ambiente da casa.
 
   
 
-A proposta de ação deste projeto de estufa residencial envolve a criação de um sistema de controle ambiental altamente sofisticado, que utiliza sensores e atuadores para otimizar as condições de crescimento das plantas de forma precisa e eficiente. Isso será alcançado por meio da implementação de tecnologias modernas e sustentáveis, com base em uma fundamentação teórica sólida.
+A proposta de ação deste projeto de estufa residencial envolve a criação de um sistema de controle que utiliza sensores e atuadores para otimizar as condições de crescimento das plantas de forma precisa e eficiente. Isso será alcançado por meio da implementação de tecnologias modernas e sustentáveis, com base em uma fundamentação teórica sólida.
 
   
 
@@ -32,7 +34,7 @@ A proposta de ação também considera a influência das condições ambientais 
 
   
 
-O projeto da estufa residencial combina tecnologia avançada e materiais acessíveis para criar um ambiente de cultivo ideal para plantas, controlado por um microcontrolador KL05Z. A visão principal é fornecer um sistema de cultivo automatizado e sustentável que seja eficiente em termos energéticos, amigável para os usuários e forneça feedback visual em tempo real.
+O projeto da estufa residencial combina tecnologia avançada e materiais acessíveis para criar um ambiente de cultivo ideal para plantas, controlado por um microcontrolador KL05Z. A visão principal é fornecer um sistema de cultivo automatizado e sustentável que seja eficiente em termos energéticos, amigável para os usuários e forneça feedback visual em tempo real. 
 
   
 
@@ -69,6 +71,7 @@ O projeto da estufa residencial combina tecnologia avançada e materiais acessí
 - Um display LCD será incorporado ao sistema para mostrar os valores das medidas dos sensores em tempo real.
 
 - O display também permitirá que os usuários visualizem e ajustem os parâmetros pré-definidos, como níveis de umidade, temperatura e luminosidade, oferecendo uma interface amigável e interativa.
+  
 
 
 **Estratégias e Técnicas:**
@@ -78,6 +81,8 @@ O projeto da estufa residencial combina tecnologia avançada e materiais acessí
 - Será implementado um algoritmo de controle que ajusta automaticamente os parâmetros com base nas leituras dos sensores e nas configurações pré-definidas pelos usuários.
 
 - As técnicas de controle PID serão usadas para manter a estabilidade do ambiente da estufa, garantindo que as condições ideais sejam mantidas.
+- O controle PID é um tipo de controle de realimentação utilizado em sistemas automáticos para manter ou atingir um determinado valor desejado em um processo.
+- O controle PID é frequentemente usado em sistemas de automação e controle de processos para manter variáveis como temperatura, pressão, velocidade, posição, nível, entre outras, dentro de faixas desejadas.
 
   
 
