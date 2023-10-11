@@ -99,8 +99,6 @@ O projeto da estufa residencial combina tecnologia avançada e materiais acessí
 
 - Display LCD para feedback visual e interação com o usuário.
 
-![estufa-representação](https://photos.app.goo.gl/ewY2uEkt46DdXi2E9)
-
 ```mermaid
 graph LR
 A[Sensor de Temperatura]--> D
