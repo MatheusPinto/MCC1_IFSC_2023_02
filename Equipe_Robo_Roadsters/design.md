@@ -12,7 +12,7 @@ O app RoboRoadster foi criado a partir do [**MIT app inventor**](https://ai2.app
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/tela_inicial_app.png" width="40%">
+<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/tela_inicial_app.png" width="40%">
 
 </div>
 
@@ -22,7 +22,7 @@ O app RoboRoadster foi criado a partir do [**MIT app inventor**](https://ai2.app
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/tela_escolha_dispositivo.png" width="40%">
+<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/tela_escolha_dispositivo.png" width="40%">
 
 </div>
 
@@ -32,7 +32,7 @@ O app RoboRoadster foi criado a partir do [**MIT app inventor**](https://ai2.app
 
 <div align="center">
   
-<img src="Tela de escolha do modo](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/tela_escolha_modo.png" width="40%">
+<img src="Tela de escolha do modo](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/tela_escolha_modo.png" width="40%">
 
 </div>
 
