@@ -6,7 +6,7 @@ Para o Software, foi desenvolvido uma máquina de estados levando em consideraç
 ### 2.2.1   Máquina de estados
 ### 2.2.2 App de interface humana
 
-O app RoboRoadster foi criado a partir do [**MIT app inventor**](https://ai2.appinventor.mit.edu/), um site com ambiente de desenvolvimento de aplicativos Android e IOS que permite criar apps com programação em blocos. O app permite escolher o RoboRoadster disponível para conectar-se via bluetooth e, posteriormente, escolher o modo de operação, seguidor de linha, automático ou teleoperado. Assim que escolhido um RoboRoadster para conectar-se, uma mensagem de bluetooth conectado surge e as opções de modo de operação são desbloqueadas. Observe na figura 2, 3, 4 o processo descrito.
+O app RoboRoadster foi criado a partir do [**MIT app inventor**](https://ai2.appinventor.mit.edu/), um site com ambiente de desenvolvimento de aplicativos Android e IOS que permite criar apps com programação em blocos. O app permite escolher o RoboRoadster disponível para conectar-se via bluetooth e, posteriormente, escolher o modo de operação, seguidor de linha, automático ou teleoperado. Assim que escolhido um RoboRoadster para conectar-se, uma mensagem de "bluetooth conectado" surge e as opções de modo de operação são desbloqueadas. Observe na figura 2, 3, 4 o processo descrito.
 
 <p align="center"><strong>Figura 2 - Tela inicial do app</strong></p>
 
@@ -32,7 +32,7 @@ O app RoboRoadster foi criado a partir do [**MIT app inventor**](https://ai2.app
 
 <div align="center">
   
-<img src="Tela de escolha do modo](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/tela_escolha_modo.png" width="40%">
+<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/tela_escolha_modo.png" width="40%">
 
 </div>
 
@@ -44,7 +44,7 @@ No modo automatico, o usuário entra com a coordenada final do RoboRoadster. No 
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/tela_automatico_app.png" width="40%">
+<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/modoAutomatico.png" width="40%">
 
 </div>
 
@@ -54,7 +54,7 @@ No modo automatico, o usuário entra com a coordenada final do RoboRoadster. No 
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/tela_teleoperado.png" width="40%">
+<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/modoTeleoperado.png" width="40%">
 
 </div>
 
@@ -64,7 +64,7 @@ No modo automatico, o usuário entra com a coordenada final do RoboRoadster. No 
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/tela_seguidor.png" width="40%">
+<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/modoSeguidor.png" width="40%">
 
 </div>
 <br>
