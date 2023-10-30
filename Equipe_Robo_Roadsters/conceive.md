@@ -67,4 +67,8 @@ A imagem abaixo exemplifica, de forma simplificada, o que foi descrito no tópic
 
 </div>
 
+<div align="center">
+  
 [Retroceder](https://github.com/ciceroed/MCC1_IFSC_2023_02/tree/main/Equipe_Robo_Roadsters) | [Avançar](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/design.md)
+
+</div>
