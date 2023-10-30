@@ -1,4 +1,4 @@
-![Logo do IFSC](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/ifsc_logo.png)
+![Logo do IFSC](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/ifsc_logo.png)
 
 # ROBOROADSTERS
 ## Repositório destinado para fins de aprendizado e desenvolvimento do Projeto RoboRoadsters, da matéria de Microcontroladores - Engenharia Eletrônica
