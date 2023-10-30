@@ -69,8 +69,8 @@ No modo automatico, o usuário entra com a coordenada final do RoboRoadster. No 
 </div>
 <br>
 
-<p align="center">
+<div align="center">
 
 [Retroceder](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/conceive.md) | [Avançar](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/implement.md)
 
-</p>
+</div>
