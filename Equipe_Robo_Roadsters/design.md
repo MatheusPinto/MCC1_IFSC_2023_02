@@ -38,7 +38,8 @@ O app RoboRoadster foi criado a partir do [**MIT app inventor**](https://ai2.app
 
 <br>
 
-No modo automatico, o usuário entra com a coordenada final do RoboRoadster. No modo seguidor de linha, o Roboroadster apenas segue uma linha conforme o comando do usuário e, por fim, o modo teleoperado deixa o usuário controlar o robo. O robo retorna sua posição constantemente em todos os modos. As telas de operação do modo automático, teleoperado e seguidor de linha podem ser vistas nas **figuras 5, 6** e **7**, respectivamente.
+No modo automatico, o usuário entra com a coordenada final do RoboRoadster, que é repassada via bluetooth para o microcontrolador. No modo seguidor de linha, o Roboroadster apenas segue uma linha conforme o comando do usuário e, por fim, o modo teleoperado deixa o usuário controlar o robo através de comandos de direções. Cada comando de direção tocado envia uma letra diferente via bluetooth, indicando a direção que o RoboRoadster deve seguir. As letras enviadas são F (Foward), B (Backward), R (Rigth) e L (Left).<p>
+O robo retorna sua posição constantemente em todos os modos. As telas de operação do modo automático, teleoperado e seguidor de linha podem ser vistas nas **figuras 5, 6** e **7**, respectivamente.
 
 <p align="center"><strong>Figura 5 - Tela de modo automatico</strong></p>
 
