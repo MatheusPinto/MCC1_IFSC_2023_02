@@ -13,5 +13,5 @@
 [**2.    DESIGN DO PROJETO**](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/design.md)<p>
 **2.1   Hardware**<p>
 **2.2   Software**<p>
-2.2.1   Máquina de estados<p>
-2.2.2 App de interface humana<p>
+2.2.1   App de interface humana<p>
+2.2.2 Máquina de estados<p>
