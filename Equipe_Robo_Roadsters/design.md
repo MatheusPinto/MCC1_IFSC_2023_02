@@ -8,7 +8,7 @@ Para o Software, foi desenvolvido uma máquina de estados levando em consideraç
 
 ### 2.2.2 App de interface humana
 
-O app RoboRoadster foi criado a partir do [**MIT app inventor**](https://ai2.appinventor.mit.edu/), um site com ambiente de desenvolvimento de aplicativos Android e IOS que permite criar apps com programação em blocos. O app permite escolher o RoboRoadster disponível para conectar-se via bluetooth e, posteriormente, escolher o modo de operação seguidor de linha, automático ou teleoperado. <br>
+O app RoboRoadster foi criado a partir do [**MIT app inventor**](https://ai2.appinventor.mit.edu/), um site com ambiente de desenvolvimento de aplicativos Android e IOS que permite criar apps com programação em blocos. O app permite escolher o RoboRoadster disponível para conectar-se via bluetooth e, posteriormente, escolher o modo de operação seguidor de linha, automático ou teleoperado. O microcontrolador fornece as coordenadas atuais do carrinho para o app, que mostra na 3 telas de modo de operação. <br>
 A tela inicial do app é mostrada na **Figura 2** abaixo.
 
 <p align="center"><strong>Figura 2 - Tela inicial do app</strong></p>
@@ -31,7 +31,7 @@ Assim que escolhido um RoboRoadster para conectar-se, uma mensagem de "bluetooth
 
 </div>
 
-<br>
+<br> <br>
 
 
 
@@ -51,18 +51,26 @@ No modo automatico, o usuário entra com as coordenadas x,y de destino do RoboRo
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/modoAutomatico.png" width="40%">
+<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/tela_automatico_app.png" width="40%">
 
 </div>
 
 <br>
 
-No modo seguidor de linha, o Roboroadster apenas segue uma linha conforme o comando do usuário e, por fim, o modo teleoperado deixa o usuário controlar o robo através de comandos de direções. Cada comando de direção tocado envia uma letra diferente via bluetooth, indicando a direção que o RoboRoadster deve seguir. As letras enviadas são F (Foward), B (Backward), R (Rigth) e L (Left).<p>
-O robo retorna sua posição constantemente em todos os modos. As telas de operação do modo automático, teleoperado e seguidor de linha podem ser vistas nas **figuras 5, 6** e **7**, respectivamente.
+No modo seguidor de linha, o Roboroadster apenas segue uma linha, conforme o comando do usuário para iniciar a operação. O comando é enviado ao microcontrolador após o usuário tocar no mapa da tela mostrada na **Figura 6.** <br>
 
+<p align="center"><strong>Figura 6 - Tela de seguidor de linha</strong></p>
+
+<div align="center">
+  
+<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/modoSeguidor.png" width="40%">
+
+</div>
 <br>
 
-<p align="center"><strong>Figura 6 - Tela de modo teleoperado</strong></p>
+Por fim, o modo teleoperado deixa o usuário controlar o robo através de comandos de direções. Cada comando de direção tocado na tela envia um valor diferente para o microcontrolador, que interpreta como comando para qual direção que o RoboRoadster deve seguir. Tocando a seta "para cima" ou "para baixo", o robo deve seguir em frente ou para trás, respectivamente. Já as setas laterais indicam para qual lado o rodo deve girar, e as combinações das setas são interpretadas como curvas a serem feitas. Veja na **Figura 7** a tela do modo teleoperado. <br>
+
+<p align="center"><strong>Figura 7 - Tela de modo teleoperado</strong></p>
 
 <div align="center">
   
@@ -72,19 +80,27 @@ O robo retorna sua posição constantemente em todos os modos. As telas de opera
 
 <br>
 
-<p align="center"><strong>Figura 7 - Tela de seguidor de linha</strong></p>
+### 2.2.1   Máquina de estados
 
-<div align="center">
-  
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/modoSeguidor.png" width="40%">
 
-</div>
-<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div align="center">
 
 [Retroceder](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/conceive.md) | [Avançar](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/implement.md)
 
 </div>
-
-### 2.2.1   Máquina de estados
