@@ -14,6 +14,7 @@ Para tornar a compreensão do produto mais simples, a tela provavelmente será a
 
 ![LCD](img/LCD.jpg)
 
+
 `			`Figura 3: LCD Display interface do usuário.
 
 
@@ -24,7 +25,7 @@ Por último, é fascinante reconhecer a versatilidade da utilização e a varied
 
 
 
-**DESIGN - CDIO: Automatizador de Chopp**
+# DESIGN - CDIO: Automatizador de Chopp
 
 **Introdução:**
 
@@ -33,11 +34,14 @@ O Automatizador de Chopp representa uma solução inovadora para o mercado de ba
 Diagramas de Blocos:
 
 ![diagrama](img/diagrama.png)
+
+
 `			`Figura 2-  Diagrama de Blocos.
 
 Sistema Eletrônico:
 
 ![esquematico](img/esquematico.png)
+
 
 `			`Figura 2-  Fluxograma de Operação.
 
@@ -74,6 +78,7 @@ Conforme o fluxograma acima, o start do sistema é dado quando o cliente coloca 
 
 ![interface](img/LCD.jpg)
 
+
 `			`Figura 3: LCD Display interface do usuário.
 
 
@@ -82,6 +87,7 @@ Conforme o fluxograma acima, o start do sistema é dado quando o cliente coloca 
 Segue figura 4 exemplificando o produto final pela visão do usuário:
 
 ![Interface](img/Interface.png)
+
 
 `			`Figura 4: Interface final do Usuário.
 
