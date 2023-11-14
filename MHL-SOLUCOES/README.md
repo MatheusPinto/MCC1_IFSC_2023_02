@@ -81,7 +81,7 @@ Conforme o fluxograma acima, o start do sistema é dado quando o cliente coloca 
 
 Segue figura 4 exemplificando o produto final pela visão do usuário:
 
-![interface](img/interface.png)
+![Interface](img/Interface.png)
 
 `			`Figura 4: Interface final do Usuário.
 
