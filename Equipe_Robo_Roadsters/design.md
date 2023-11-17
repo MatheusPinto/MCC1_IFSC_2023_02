@@ -2,6 +2,72 @@
 
 ## 2.1   Hardware
 
+O robô utilizado no projeto possui uma placa de potência com 26 pinos para a comunicação com todos os periféricos, dessa forma, foi necessário o desenvolvimento de um shield para conectar o microcontrolador.
+
+O shield desenvolvido teve como base outro shield para Arduino Uno, visto que a disposição de pinos do KL05Z é compatível com o Arduino Rev 3.
+
+## Analog pins
+
+| Analog input  | KL05Z pin  | Board label  | Signal |
+| ------------- | -------- | ------------ | ------ |
+| ADC0          | PTA8       |   ADC0       | Bat0   |
+| ADC1          | PTB9       |   ADC1       | Bat1   |
+| ADC2          | PTB8       |   ADC2       | Ampop1 |
+| ADC3          | PTA0       |   ADC3       | Ampop2 |
+
+
+## Ultrasonic sensor
+
+| MK05Z Pin | Signal|
+| ------- | ------|
+| PTB10       | Echo0 |
+| PTB7       | Trig0 |
+| PTA11       | Echo1 |
+| PTA10       | Trig1 |
+
+## Motors
+
+|MK05Z Pin | Signal|  Board label |
+| ---------- | ------| ------------ |
+| PTB6          | PWM1  |  M1          |
+| PTA12          | PWM1N |  M1N         |
+| PTA5         | PWM2  |  M2          |
+| PTB5          | PWM2N |  M2N         |
+
+## Speed econder
+
+| MKL05Z Pin | Signal |  Board label |
+| ----------- | ------ | ------------ |
+| PTB0          | D0     | ENC0         |
+| PTA6          | D1     | ENC1         |
+
+## Optic sensor
+
+| MKL05Z Pin | Signal | Board label |
+| ----------- | ------ | ----------- |
+| PTB4          | R_TCRT | R DIR       |
+| PTB3        | L_TCRT | L ESQ       |
+
+## UART
+
+| MKL05Z Pin | Signal |
+| ------- | ------ |
+| TX      | TX     |
+| RX      | RX     |
+
+
+<p align="center"><strong>Figura 1 - Shield KL05Z 3D View</strong></p>
+
+<div align="center">
+  
+![Board](imagens/board.png)
+
+</div>
+
+<br>
+
+Toda a documentação de esquemático, layout e projeto do shield, assim como da placa de potência do robô estão detalhadas no repositório [automated_buggy](https://github.com/ciceroed/automated_buggy).
+
 ## 2.2   Software
 
 Para o Software, foi desenvolvido uma máquina de estados levando em consideração os requisitos de projeto e um app para servir de interface entre o usuário e qualquer RoboRoadster.
@@ -15,7 +81,7 @@ A tela inicial do app é mostrada na **Figura 2** abaixo.
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/tela_inicial_app.png" width="40%">
+<img src="imagens/tela_inicial_app.png" width="40%">
 
 </div>
 
@@ -27,7 +93,7 @@ Assim que escolhido um RoboRoadster para conectar-se, uma mensagem de "bluetooth
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/tela_escolha_dispositivo.png" width="40%">
+<img src="imagens/tela_escolha_dispositivo.png" width="40%">
 
 </div>
 
@@ -39,7 +105,7 @@ Assim que escolhido um RoboRoadster para conectar-se, uma mensagem de "bluetooth
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/tela_escolha_modo.png" width="40%">
+<img src="imagens/tela_escolha_modo.png" width="40%">
 
 </div>
 
@@ -51,7 +117,7 @@ No modo automatico, o usuário entra com as coordenadas x,y de destino do RoboRo
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/tela_automatico_app.png" width="40%">
+<img src="imagens/tela_automatico_app.png" width="40%">
 
 </div>
 
@@ -63,7 +129,7 @@ No modo seguidor de linha, o Roboroadster apenas segue uma linha, conforme o com
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/modoSeguidor.png" width="40%">
+<img src="imagens/modoSeguidor.png" width="40%">
 
 </div>
 <br>
@@ -74,7 +140,7 @@ Por fim, o modo teleoperado deixa o usuário controlar o robo através de comand
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/modoTeleoperado.png" width="40%">
+<img src="imagens/modoTeleoperado.png" width="40%">
 
 </div>
 
@@ -86,7 +152,7 @@ A Máquina de estados adotada no projeto se subdivide em três modos distintos, 
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/Maquina%20de%20Estados.jpg" width="60%">
+<img src="imagens/Maquina%20de%20Estados.jpg" width="60%">
 
 </div>
 
@@ -96,7 +162,7 @@ No modo automático, o carrinho permanecerá em espera até que as coordenadas d
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/fsm_modo_automatico.jpg" width="60%">
+<img src="imagens/fsm_modo_automatico.jpg" width="60%">
 
 </div>
 
@@ -104,7 +170,7 @@ No modo seguidor de linha, o carrinho realiza a configuração dos sensores. Se 
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/fsm_modo_seguidor.jpg" width="60%">
+<img src="imagens/fsm_modo_seguidor.jpg" width="60%">
 
 </div>
 
@@ -114,9 +180,9 @@ Os movimentos possíveis para o carrinho neste modo incluem acelerar para frente
 
 <div align="center">
   
-<img src="https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/imagens/fsm_modo_teleoperado.jpg" width="60%">
+<img src="imagens/fsm_modo_teleoperado.jpg" width="60%">
 
 
-[Retroceder](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/conceive.md) | [Avançar](https://github.com/ciceroed/MCC1_IFSC_2023_02/blob/main/Equipe_Robo_Roadsters/implement.md)
+[Retroceder](conceive.md) | [Avançar](implement.md)
 
 </div>
