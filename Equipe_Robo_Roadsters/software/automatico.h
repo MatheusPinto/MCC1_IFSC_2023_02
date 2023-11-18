@@ -8,20 +8,6 @@
 #ifndef SOURCES_AUTOMATICO_H_
 #define SOURCES_AUTOMATICO_H_
 
-/*TIPOS ENUMERADOS*/
-/*=======================================================================================*/
-
-/* Possíveis estados da FSM */
-typedef enum {
-	AGUARDANDO_MODO_DE_OPERACAO = 0U,
-	AGUARDANDO_DESTINO,
-	CONFIGURAR_SENSORES_DO_AUTONOMO,
-	CONTROLE_PID,
-	DESVIA_OBJETO,
-} estado_t;
-
-/*FIM: TIPOS ENUMERADOS*/
-/*=======================================================================================*/
 
 /*PROTOTIPOS - FUNCOES PUBLICAS*/
 /*=======================================================================================*/
@@ -129,7 +115,7 @@ void Automatico_DesabilitaSensores(void);
   *
   * Comentarios : Nenhum.
  */
-void Automatico_HabilitaSensores(void);
+void Automatico_ConfiguraPID(void);
 
 /** Funcao : Automatico_ControlePID
   *
