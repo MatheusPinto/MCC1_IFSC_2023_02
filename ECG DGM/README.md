@@ -146,7 +146,7 @@ ____________
 
 ____________
 ### Pinos
-*Os pinos responsáveis por conectar o ECG ao KL05z são de natureza analógica, e o propósito do microcontrolador é converter esses sinais analógicos em saída digital para serem enviados aos pinos do dispositivo Bluetooth.
+Os pinos responsáveis por conectar o ECG ao KL05z são de natureza analógica, e o propósito do microcontrolador é converter esses sinais analógicos em saída digital para serem enviados aos pinos do dispositivo Bluetooth.
 
 No caso específico do FRDM-KL05Z, os pinos A0-A5 são destinados às entradas analógicas. Esses pinos são conectados ao conversor analógico-digital (ADC) do microcontrolador, permitindo a leitura de sinais analógicos.
 
