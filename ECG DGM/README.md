@@ -145,5 +145,29 @@ ____________
 ![image](https://github.com/SarahBararua/Microcontroladores/assets/74320017/9b54f481-d114-4bc6-92f4-970f6e810715)
 
 ____________
+### Pinos
+Os pinos responsáveis por conectar o ECG ao KL05z são de natureza analógica, e o propósito do microcontrolador é converter esses sinais analógicos em saída digital para serem enviados aos pinos do dispositivo Bluetooth.
+No caso específico do FRDM-KL05Z, os pinos A0-A5 são destinados às entradas analógicas. Esses pinos são conectados ao conversor analógico-digital (ADC) do microcontrolador, permitindo a leitura de sinais analógicos.
+Para fazer a ligação do módulo Blurtooth os pinos 0 e 1 do microcontrolador FRDM-KL05Z serão utilizados, esses geralmente são associados à funcionalidade de comunicação serial assíncrona (UART - Universal Asynchronous Receiver-Transmitter). Porém é importante ressaltar que é possível utilizar outros pinos do microcontrolador para a conexão de um módulo Bluetooth, não se restringindo apenas aos pinos 0 e 1.
+Entretanto, é importante observar que nenhum dos dois módulos possui uma biblioteca pronta disponível para inclusão direta no código. A biblioteca base que será modificada para uso do módulo ECG é a biblioteca que usa este módulo porém para o Arduino.
+É crucial ressaltar que, uma vez que possuímos a informação sobre os pinos envolvidos, é imperativo direcionar nossa atenção prioritariamente para a fase de conversão do sinal analógico para o formato digital.
 
+____________
+### Planejamento
+* Configuração dos Pinos:
+Identificação dos pinos do FRDM-KL05Z que serão conectados aos módulos ECG e Bluetooth.
+Utilização das funções adequadas para configurar esses pinos no modo correto (analógico para o ECG e serial para o Bluetooth).
+* Inicialização dos Módulos:
+a. Módulo ECG (AD8232):
+Configuração dos pinos de entrada analógica para a leitura dos sinais do ECG.
+Inicialização o ADC (Conversor Analógico-Digital) para processar os sinais analógicos do ECG.
+b. Módulo Bluetooth (HC-05):
+Configuração dos pinos de comunicação serial (UART) para a comunicação com o módulo Bluetooth.
+Inicialização da comunicação UART com as configurações adequadas (baud rate, bits de dados, paridade, etc.).
+* Loop Principal:
+No loop principal do programa usaremos:
+Realização da leitura dos sinais do ECG utilizando o ADC.
+O envio dos dados lidos do ECG através do módulo Bluetooth via UART.
+Verificação e processamento dos dados recebidos pelo Bluetooth, se houver.
+Implementação da lógica de controle, filtragem ou processamento de sinais do ECG.
 
