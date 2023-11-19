@@ -2,7 +2,7 @@
 
 Conforme já explicado serão implementados dois módulos de controle, um para a sala e outro para o quarto, sendo que a comunicação entre eles será via UART. 
 
-![Wall-e](Freedom/img/diagramaBlocos.PNG)
+![Wall-e](img/diagramaBlocos.PNG)
 
 **Módulos por cômodo** 
 
@@ -68,7 +68,7 @@ PTA7 -> SPIO_MOSI ALT3
 
 
 
-
+![Wall-e](img/kl05z.PNG)
 
 
 
@@ -76,33 +76,33 @@ PTA7 -> SPIO_MOSI ALT3
 
 Como módulo para comunicação PWM será usado um circuito com dois transistores a fim de controlar uma maior potência será usado um Mosfet como alimentação para as luminárias LED. Sendo assim o microcontrolador irá através do PWM controlar a tensão de saída do Mosfet resultado o controle da intensidade luminosa dos LEDs. 
 
-
+![Wall-e](img/pwm.PNG)
 
 **Ponte H**
 
 Como módulo de controle para os motores será usado uma ponte H com transistores, o que permitirá acionar o motor para os dois lados, aplicando as funcionalidades de abrir e fechar as cortinas. 
 
-
+![Wall-e](img/ponteH.PNG)
 
 **Rele**
 
 Como módulo responsável pelo controle do ventilador e da tomada tem-se o módulo rele, que permite acionar uma grandeza com sinal alternado em 220V. Como circuito para conectar o microcontrolador à bobina de acionamento do rele foi implementado um optoacoplador com um transistor, assim a corrente necessária para acionar a bobina não será fornecida pelo microcontrolador, mas sim de uma fonte externa. 
 
 
-
-
+![Wall-e](img/rele.PNG)
 
 **LDR**
 
 Como módulo responsável por captar a variação da iluminação será implementado um LDR, que opera como um resistor sensível à luz. O circuito para funcionamento do LDR é bem simples, operando com um divisor de tensão entre um resistor fixo e o LDR, a medida em que a intensidade da luz aumenta a resistência do LDR cai mudando assim a queda de tensão que está sendo monitorada por um ADC. 
 
+![Wall-e](img/ldr.PNG)
 
 **LM35**
 
 Como módulo responsável por captar as mudanças de temperatura será implementado um módulo usando o LM35, um transistor sensível à temperatura. Onde para cada 0,5ºC a tensão de saída oscila 10mV. 
 
 
-
+![Wall-e](img/lm35.PNG)
 
 
 
