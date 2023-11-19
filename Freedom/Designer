@@ -2,7 +2,7 @@
 
 Conforme já explicado serão implementados dois módulos de controle, um para a sala e outro para o quarto, sendo que a comunicação entre eles será via UART. 
 
-
+![Wall-e](Freedom/img/diagramaBlocos.PNG)
 
 **Módulos por cômodo** 
 
