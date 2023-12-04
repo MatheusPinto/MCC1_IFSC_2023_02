@@ -2,57 +2,108 @@
  * automatico.c
  *
  *  Created on: 15/11/2023
- *      Author: Bruno Camargo, Cícero Eduardo Dick Junior e Marcelo Zampieri Pereira da Silva
+ *      Author: Bruno Camargo, CÃ­cero Eduardo Dick Junior e Marcelo Zampieri Pereira da Silva
  */
 
-# include "automatico.h"
-# include <stdbool.h>
-# include "pid_ctrl.h"
+#include "automatico.h"
+#include "pid_ctrl.h"
+#include "mcu/drivers/uart/uart.h"
+#include <stdbool.h>
+#include <stdint.h>
 
 static volatile pidCtrlHandle_t handleAngulo;
 static volatile pidCtrlHandle_t handleMag;
+static volatile uint8_t objective[2];		// distância de 0 a 255 em x e y
 
 // Eventos
 
-// Implementar UART para HC-05
-_Bool IsCommandAutomatic(){
+/** Funcao : Automatico_IsComandAutomatic
+  *
+  * Descricao : Verifica se o comando automatico foi passado via bluetooth.
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : 0 se o comando nao foi passado e !0 caso contrário.
+  *
+  * Comentarios : Nenhum.
+ */
+_Bool Automatico_IsComandAutomatic(void){
 
-	/*Ler comando no serial Bluetooth*/
-	/*
-	 * Se o comando for = A, retorna verdadeiro
-	 *
-	 * */
+	if (UART_IsRXAvailable(UART0) && UART_Read(UART0)=='A') {
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+/** Funcao : Automatico_IsCommandGoBack
+  *
+  * Descricao : Verifica se o comando voltar foi passado via bluetooth.
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : 0 se o comando nao foi passado e !0 caso contrário.
+  *
+  * Comentarios : Nenhum.
+ */
+_Bool Automatico_IsCommandGoBack(void){
+
+	if (UART_IsRxAvailable(UART0) && UART_Read(UART0)=='R') {
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+/** Funcao : Automatico_IsCoordinatesOk
+  *
+  * Descricao : Verifica se dados chegaram e, se sim obtem os dados do objetivo
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : 0 se o comando nao foi passado e !0 caso contrário.
+  *
+  * Comentarios : Nenhum.
+ */
+_Bool Automatico_IsCoordinatesOk(void) {
+	// Se tiver dado para receber
+	if (UART_IsRxAvailable(UART0)) {
+		// Recebe x
+		objective[0] = UART_Read(UART0);
+		while (!UART_IsRxAvailable(UART0));
+		// Recebe y
+		objective[1] = UART_Read(UART0);
+		return TRUE;
+	}
+
+	// Se não, retorna falso
+	else return FALSE;
+}
 
 
+_Bool Automatico_IsOnDestination(){
 
-};
-// Implementar UART para HC-05
-_Bool IsCommandGoBack(){
+	/* Implementar Odometria (Encoders)
+	 * Comparar Objective com localization
+	 */
+}
 
-	/*Ler comando no serial Bluetooth*/
-	/*
-	 * Se o comando for = voltar, retorna verdadeiro
-	 *
-	 * */
-
-
-};
-
-
-_Bool IsCoordinatesOk();
-_Bool IsOnDestination(); // Implementar Odometria (Encoders)
-//_Bool IsSensorsOk();	 // Implementar Encoders e Ultrassonico
-_Bool Obstacles();		 // Implementar Ultrassonico
+// Implementar Encoders e Ultrassonico
+_Bool Obstacles();
 
 
 // Tratamento de eventos
-void Automatico_DesabilitaSensores(void);
+void Automatico_DesabilitaSensores(void){
+	/*
+	 * Deve desabilitar interrupções
+	 */
+}
 
 
 
 void Automatico_ConfiguraPID(void){
 
-	/*Cria vari�vel de configura��o do controle PID para distancia*/
+	/*Cria variável de configuração do controle PID para distancia*/
 	pidCtrlConfig_t* configMag = CtrlPID_CreateConfig();
 
 	configMag->gainP = 15;
@@ -65,7 +116,7 @@ void Automatico_ConfiguraPID(void){
 	configMag->ErrorI = 0;
 
 
-	/*Cria vari�vel de configura��o do controle PID para angulo*/
+	/*Cria variável de configuração do controle PID para angulo*/
 	pidCtrlConfig_t* configAngulo = CtrlPID_CreateConfig();
 
 	configAngulo->gainP = 15;
@@ -82,7 +133,7 @@ void Automatico_ConfiguraPID(void){
 	handleAngulo = CtrlPID_Init(configAngulo);
 
 
-	/*Inicializar Sensor Ultrass�nico*/
+	/*Inicializar Sensor Ultrassônico*/
 
 };
 
