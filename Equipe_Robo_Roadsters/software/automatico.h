@@ -8,6 +8,8 @@
 #ifndef SOURCES_AUTOMATICO_H_
 #define SOURCES_AUTOMATICO_H_
 
+#define TRUE 	1
+#define FALSE 	0
 
 /*PROTOTIPOS - FUNCOES PUBLICAS*/
 /*=======================================================================================*/
@@ -25,7 +27,7 @@
   *
   * Comentarios : Nenhum.
  */
-_Bool Automatico_IsCommandGoBack(void);
+_Bool Automatico_IsComandAutomatic(void);
 
 /** Funcao : Automatico_IsCommandGoBack
   *
@@ -41,7 +43,7 @@ _Bool Automatico_IsCommandGoBack(void);
 
 /** Funcao : Automatico_IsCoordinatesOk
   *
-  * Descricao : Verifica se coordenadas reais foram passadas && o comando iniciar trajetória foi acionado.
+  * Descricao : Verifica se coordenadas reais foram passadas.
   *
   * Entradas : Vazia
   *

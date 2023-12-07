@@ -5,6 +5,7 @@
 
 #include <MKL05Z4.h>
 #include "automatico.h"
+#include "system/system.h"
 
 /*TIPOS ENUMERADOS*/
 /*=======================================================================================*/
@@ -21,14 +22,14 @@ typedef enum {
 /*FIM: TIPOS ENUMERADOS*/
 /*=======================================================================================*/
 
-// ver com o professor sobre o uso de static no caso de utilização de IRQs para alterar estados
 static volatile estado_t currentState;
 
 int main(void)
 {
-	//System_Init();
+	System_Init();
 
-	//medir_distancia();
+	/* Estado inicial */
+	currentState=AGUARDADNDO_MODO_DE_OPERACAO;
 
 	for (;;) {
 
