@@ -14,7 +14,6 @@
 typedef enum {
 	AGUARDANDO_MODO_DE_OPERACAO = 0U,
 	AGUARDANDO_DESTINO,
-//	CONFIGURAR_SENSORES_DO_AUTONOMO,
 	CONTROLE_PID,
 	DESVIA_OBJETO,
 } estado_t;
@@ -22,59 +21,49 @@ typedef enum {
 /*FIM: TIPOS ENUMERADOS*/
 /*=======================================================================================*/
 
-static volatile estado_t currentState;
+static volatile estado_t g_currentState;
+
+
+
+
 
 int main(void)
 {
 	System_Init();
 
 	/* Estado inicial */
-	currentState=AGUARDADNDO_MODO_DE_OPERACAO;
+	g_currentState=AGUARDANDO_MODO_DE_OPERACAO;
 
 	for (;;) {
 
-		switch (currentState) {
+		switch (g_currentState) {
 		case (AGUARDANDO_MODO_DE_OPERACAO):
 			if (Automatico_IsCommandAutomatic()) {
 				Automatico_ConfiguraPID();
-				currentState = AGUARDANDO_DESTINO;
-			}
-			// Adicionar novos modos de operação
-			else
-			break;
-//		case (CONFIGURAR_SENSORES_DO_AUTONOMO):
-//			Automatico_HabilitaSensores();
-//			if (Automatico_IsCommandGoBack()) {
-//				currentState = AGUARDANDO_MODO_DE_OPERACAO;
-//				Automatico_DesabilitaSensores();
-//			}
-//			else if (Automatico_IsSensoresOk()) {
-//
-//				currentState = AGUARDANDO_DESTINO;
-//			}
-//			break;
+				g_currentState = AGUARDANDO_DESTINO;
+			} else
+				break;
 		case (AGUARDANDO_DESTINO):
 			if (Automatico_IsCommandGoBack()) {
-				currentState = AGUARDANDO_MODO_DE_OPERACAO;
-				Automatico_DesabilitaSensores();
-			}
-			else if (Automatico_IsCoordinatesOk() && !Automatico_IsOnDestination()){
-				currentState = CONTROLE_PID;
+				g_currentState = AGUARDANDO_MODO_DE_OPERACAO;
+				//Automatico_DesabilitaSensores();
+			} else if (Automatico_IsCoordinatesOk() /*&& !Automatico_IsOnDestination()*/) {
+				g_currentState = CONTROLE_PID;
 			}
 			break;
 		case (CONTROLE_PID):
 			if (Automatico_IsCommandGoBack()) {
-				currentState = AGUARDANDO_MODO_DE_OPERACAO;
-				Automatico_DesabilitaSensores();
+				g_currentState = AGUARDANDO_MODO_DE_OPERACAO;
+				//Automatico_DesabilitaSensores();
 			}
 			else {
-				Automatico_ControlePID();
+				//Automatico_ControlePID();
 			}
 			break;
 		case (DESVIA_OBJETO):
 			if (Automatico_IsCommandGoBack()) {
-				currentState = AGUARDANDO_MODO_DE_OPERACAO;
-				Automatico_DesabilitaSensores();
+				g_currentState = AGUARDANDO_MODO_DE_OPERACAO;
+				//Automatico_DesabilitaSensores();
 			}
 			break;
 		}
