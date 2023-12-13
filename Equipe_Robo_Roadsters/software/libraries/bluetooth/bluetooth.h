@@ -16,8 +16,8 @@
 /*FIM: ARQUIVOS DE CABE�ALHO*/
 /*=======================================================================================*/
 
-//Tamanho máximo do buffer
-#define	MAX_SIZE		30
+//Tamanho máximo do buffer. A quantidade máxima de dados que ele recebe é 2, as coordenadas x e y
+#define	MAX_SIZE		2
 //Pinos do HC05
 #define UART_RX			2U
 #define UART_TX			1U
