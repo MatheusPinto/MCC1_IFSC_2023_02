@@ -6,14 +6,15 @@
  */
 
 #include "ultrassound.h"
+#include <MKL05Z4.h>
 #include "../../mcu/drivers/port/port.h"
 #include "../../mcu/drivers/tpm/tpm.h"
 #include "../../mcu/drivers/gpio/gpio.h"
+#include "../delay/delay.h"
 
 
-static volatile uint8_t g_ultrassoundCounter;		// Contador do ultrassom
-static volatile uint8_t g_gerarPulso;
-static uint8_t g_trigPin, g_echoPin;
+uint8_t g_trigPin, g_echoPin;
+
 
 
 /** Funcao : Ultrassom_Init
@@ -28,27 +29,15 @@ static uint8_t g_trigPin, g_echoPin;
  */
 void Ultrassound_Init(uint8_t trigPin, uint8_t echoPin){
 
-	const uint16_t tpmPwmModulo = 6226;
-
 	// Salva os pinos escolhidos pelo usuário
 	g_trigPin=trigPin;
 	g_echoPin=echoPin;
 
-	// Seleciona o clock do contador
-	TPM_SetCounterClkSrc(TPM0, TPM_CNT_CLOCK_FLL);
-
-	/* Inicializa TPM0, dividindo clock de entrada por 128, resultando em um clock
-	 * do contador de 20.971520 MHz /128 = 163840 Hz. A contagem toal deve ser de 38ms,
-	 * dessa forma, o módulo de contagem deve ser de aproximadamente 6226 tpmPwmModulo
-	 */
-	TPM_Init(TPM0, tpmPwmModulo, TPM_PRESCALER_DIV_128);
-
-	// talvez seja melhor iniciar os ports tudo junto no system init
 	PORT_Init(PORTB);
 
 	// Inicialização dos pinos de I/O
-	GPIO_InitInputPin(GPIOB, trigPin);
-	GPIO_InitOutputPin(GPIOB, echoPin, 0);
+	GPIO_InitInputPin(GPIOB, echoPin);
+	GPIO_InitOutputPin(GPIOB, trigPin, 0);
 }
 
 /** Funcao : Ultrassom_InitRadar
@@ -62,21 +51,103 @@ void Ultrassound_Init(uint8_t trigPin, uint8_t echoPin){
   * Comentarios : Nenhum.
  */
 void Ultrassound_InitRadar(void){
-	TPM_InitCounter(TPM0); //Inicia contador com clok interno;
-	TPM_EnableIRQ(TPM0); //Habilita interrupção no overflow de contagem
-	NVIC_EnableIRQ( PORTB_IRQn ); // Habilita a IRQ do PORTB poelo NVIC
 
-	// Inicia variáveis de controle do radar
-	g_ultrassoundCounter=0;
-	g_gerarPulso=0;
+	// Configura um timer PIT
+    // Ativar o clock do sistema para o PIT(48MHz)
+    SIM->SCGC6 |= SIM_SCGC6_PIT_MASK;
+
+    // Configurar o PIT para gerar interrupções periódicas
+
+    PIT->MCR = 0;  // Habilitar o PIT
+
+    // Configurar o canal 0 do PIT com o valor de contagem calculado([Tdesejado/Tclk]-1)
+    /* Valor de contagem deve levar em conta 38ms de espera do echo + 10us de ativação do trig +
+     * coeficiente de cagaço técnico(12ms)= 50 ms:
+     * ([50ms*48MHz]-1)=2399999.
+     */
+    PIT->CHANNEL[0].LDVAL = 2399999;
+
+    // Habilitar o contador
+    PIT->CHANNEL[0].TCTRL = PIT_TCTRL_TEN_MASK | PIT_TCTRL_TIE_MASK;
+
+    // Configurar a interrupção para o PIT
+    NVIC_EnableIRQ(PIT_IRQn);
 }
 
-void PORTA_IRQHandler(void){
-	if (PORT_GetIRQFlag(PORTB, ECHO0)){
-		TPM_ClearIRQFlag(TPM0);
-		g_gerarPulso=1;
-	}
+/** Funcao : Ultrassound_FinishRadar
+  *
+  * Descricao : Finaliza as irqs relacionadas ao ultrassom.
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : Vazia.
+  *
+  * Comentarios : Nenhum.
+ */
+void Ultrassound_FinishRadar(void){
+    // Desabilitar o contador e a irq
+    PIT->CHANNEL[0].TCTRL = 0;
+
+    // Desabilitar a irq interrupção para o PIT
+    NVIC_EnableIRQ(PIT_IRQn);
 }
 
+/** Funcao : Ultrassound_Measure
+  *
+  * Descricao : Mede a distância de um objeto.
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : Distância do objeto mais próximo.
+  *
+  * Comentarios : Nenhum.
+ */
+uint8_t Ultrassound_Measure(void){
 
+	uint8_t distancia;
+	// Seta o pino por 10ms para gerar onda sonora de mapeamento do radar
+	// Pulsos devem ser atomicos
+	__disable_irq();
+	GPIO_WritePin(GPIOB, g_trigPin, HIGH);
+	Delay_Waitus(10);
+	GPIO_WritePin(GPIOB, g_trigPin, LOW);
 
+	// A contagem do tempo de retorno no ECHO também deve ser atômica
+	distancia=Ultrassom_EchoTime();
+	__enable_irq();
+
+	// Distancia = (Speed x Time) / 2 = (34cm/ms x Time) / 2. Velocidade= velocidade dosom e
+	// 1/2 porquê queremos o tempo da onda do carrinho até o objeto, e não do carrino - onjeto - carrinho
+	distancia=17*distancia;
+	return distancia;
+
+}
+
+/** Funcao : Ultrassom_EchoTime
+  *
+  * Descricao : Calcula o tempo de nível lógico alto do ECHO.
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : Tempo de nível lógico alto do ECHO.
+  *
+  * Comentarios : Nenhum.
+ */
+uint8_t Ultrassom_EchoTime(void){
+	// A contagem é top down
+	uint32_t tempoAtualCiclos=PIT->CHANNEL[0].CVAL;
+	uint8_t tempoAtual;
+
+	// Se 2399999[ciclos]=0% e 0[ciclos]=100%(50ms), então contagem%=(tempoAtual[ciclos]/2399999)-1
+	// logo, tempoAtual[ms]=contagem%*50ms=((tempoAtual[ciclos]/2399999)-1)*50ms
+	tempoAtual=50*((tempoAtualCiclos/2399999)-1); //tempoAtual em ms
+
+	while(GPIO_ReadPin(GPIOB, g_echoPin)); //Enquanto não houver borda de decida no echoPin
+
+	// Necessário proteção para o case de a contagem mais atual ter reiniciado a contagem, ex: tempoAtual=3-21323
+	// Podemos somar o valor máximo de contagem +1 ao tempo mais atual, pegando sempre apenas
+	// a contagem sobressalente do contador
+	tempoAtual=(50*((tempoAtualCiclos/2399999)-1)+256)-tempoAtual; //Calcula o tempo em que ficou em nível lógico alto
+
+	return tempoAtual;
+}
