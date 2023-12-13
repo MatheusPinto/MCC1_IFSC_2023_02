@@ -6,14 +6,20 @@
  */
 
 #include "automatico.h"
-#include "pid_ctrl.h"
-#include "mcu/drivers/uart/uart.h"
+#include "libraries/pid_ctrl/pid_ctrl.h"
+#include "libraries/ultrassound/ultrassound.h"
+#include "libraries/bluetooth/bluetooth.h"
+#include "libraries/motor/motor.h"
+#include "libraries/encoder/encoder.h"
 #include <stdbool.h>
 #include <stdint.h>
 
 static volatile pidCtrlHandle_t handleAngulo;
 static volatile pidCtrlHandle_t handleMag;
-static volatile uint8_t objective[2];		// distância de 0 a 255 em x e y
+static volatile uint8_t objective[2];		// distância de 0 a 255 cm em x e y
+volatile _Bool g_isToRefreshRadar;
+
+
 
 // Eventos
 
@@ -27,12 +33,13 @@ static volatile uint8_t objective[2];		// distância de 0 a 255 em x e y
   *
   * Comentarios : Nenhum.
  */
-_Bool Automatico_IsComandAutomatic(void){
+_Bool Automatico_IsCommandAutomatic(void){
 
-	if (UART_IsRXAvailable(UART0) && UART_Read(UART0)=='A') {
+	//Se houver elemento na pilha e for o comando for 'A', desempilha o dado e retorna TRUE;
+	if (Bluetooth_IsThereElement() && Bluetooth_GetElement()=='A'){
+		Bluetooth_Unstack();
 		return TRUE;
 	}
-
 	return FALSE;
 }
 
@@ -48,10 +55,11 @@ _Bool Automatico_IsComandAutomatic(void){
  */
 _Bool Automatico_IsCommandGoBack(void){
 
-	if (UART_IsRxAvailable(UART0) && UART_Read(UART0)=='R') {
+	//Atualiza a pilha e se houver o comando 'R', desempilha o dado e retorna TRUE;
+	if (Bluetooth_IsThereElement() && Bluetooth_GetElement()=='R') {
+		Bluetooth_Unstack();
 		return TRUE;
 	}
-
 	return FALSE;
 }
 
@@ -66,13 +74,18 @@ _Bool Automatico_IsCommandGoBack(void){
   * Comentarios : Nenhum.
  */
 _Bool Automatico_IsCoordinatesOk(void) {
-	// Se tiver dado para receber
-	if (UART_IsRxAvailable(UART0)) {
-		// Recebe x
-		objective[0] = UART_Read(UART0);
-		while (!UART_IsRxAvailable(UART0));
+
+	// Se houver dado na pilha, recebe as coordenadas x,y
+	if (Bluetooth_IsThereElement()) {
+		//Recebe x
+		objective[0] = Bluetooth_GetElement();
+		//Desempilha o x
+		Bluetooth_Unstack();
+		//Espera a coordenada y ser atualizada na pilha e a recebe.
+		while (!Bluetooth_IsThereElement());
 		// Recebe y
-		objective[1] = UART_Read(UART0);
+		objective[1] = Bluetooth_GetElement();
+		Bluetooth_Unstack();
 		return TRUE;
 	}
 
@@ -89,14 +102,29 @@ _Bool Automatico_IsOnDestination(){
 }
 
 // Implementar Encoders e Ultrassonico
-_Bool Obstacles();
+// Se o objeto estiver a 30cm, retorna verdadeiro
+_Bool Automatico_Obstacles(){
+
+	// se timer de 48ms, atualiza a distância e retorna se objeto está muito perto
+	if (g_isToRefreshRadar){
+		g_isToRefreshRadar = FALSE;
+
+		uint8_t distancia = Ultrassound_Measure();
+		//Se distancia do objeto menor que uma distancia critica
+		if (distancia<=DISTANCIA_CRITICA) return TRUE;
+	}
+	else return FALSE;
+}
 
 
 // Tratamento de eventos
+
+
 void Automatico_DesabilitaSensores(void){
 	/*
 	 * Deve desabilitar interrupções
 	 */
+	Ultrassound_FinishRadar();
 }
 
 
@@ -132,8 +160,9 @@ void Automatico_ConfiguraPID(void){
 	handleMag = CtrlPID_Init(configMag);
 	handleAngulo = CtrlPID_Init(configAngulo);
 
+	// Inicia variáveis de controle e contadores do radar ultrassom
+	Ultrassound_InitRadar();
 
-	/*Inicializar Sensor Ultrassônico*/
 
 };
 
