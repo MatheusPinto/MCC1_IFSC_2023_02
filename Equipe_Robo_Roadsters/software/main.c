@@ -24,9 +24,6 @@ typedef enum {
 static volatile estado_t g_currentState;
 
 
-
-
-
 int main(void)
 {
 	System_Init();
@@ -39,14 +36,14 @@ int main(void)
 		switch (g_currentState) {
 		case (AGUARDANDO_MODO_DE_OPERACAO):
 			if (Automatico_IsCommandAutomatic()) {
-				Automatico_ConfiguraPID();
+				//Automatico_ConfiguraSensores();
 				g_currentState = AGUARDANDO_DESTINO;
 			} else
 				break;
 		case (AGUARDANDO_DESTINO):
 			if (Automatico_IsCommandGoBack()) {
 				g_currentState = AGUARDANDO_MODO_DE_OPERACAO;
-				//Automatico_DesabilitaSensores();
+				Automatico_DesabilitaSensores();
 			} else if (Automatico_IsCoordinatesOk() /*&& !Automatico_IsOnDestination()*/) {
 				g_currentState = CONTROLE_PID;
 			}
@@ -54,7 +51,10 @@ int main(void)
 		case (CONTROLE_PID):
 			if (Automatico_IsCommandGoBack()) {
 				g_currentState = AGUARDANDO_MODO_DE_OPERACAO;
-				//Automatico_DesabilitaSensores();
+				Automatico_DesabilitaSensores();
+			}
+			else if (Automatico_Obstacles()) {
+				g_currentState = DESVIA_OBJETO;
 			}
 			else {
 				//Automatico_ControlePID();
@@ -63,8 +63,9 @@ int main(void)
 		case (DESVIA_OBJETO):
 			if (Automatico_IsCommandGoBack()) {
 				g_currentState = AGUARDANDO_MODO_DE_OPERACAO;
-				//Automatico_DesabilitaSensores();
+				Automatico_DesabilitaSensores();
 			}
+			else {} //Deve desviar de um objeto
 			break;
 		}
 	}
