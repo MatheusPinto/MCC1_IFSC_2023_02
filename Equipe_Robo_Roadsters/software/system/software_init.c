@@ -9,6 +9,7 @@
 
 void System_Software_Init( void )
 {
+  	Delay_Init();
 }
 
 
