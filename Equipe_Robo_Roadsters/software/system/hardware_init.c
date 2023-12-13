@@ -14,4 +14,6 @@ void System_Hardware_Init( void )
 {
 	Bluetooth_Init();
 	Ultrassound_Init(TRIG1, ECHO1);
+	Ultrassound_InitRadar();
 }
+
