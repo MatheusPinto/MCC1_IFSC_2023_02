@@ -11,6 +11,7 @@
 
 // buffer genérico para receber números e letras
 static volatile uint8_t g_genericBuffer[MAX_SIZE];
+// Nº de elementos na pilha
 static volatile uint8_t g_element;
 
 
@@ -90,7 +91,7 @@ _Bool Bluetooth_IsThereElement(void){
   * Comentarios : Nenhum.
  */
 uint8_t Bluetooth_GetElement(void){
-	return g_genericBuffer[g_element];
+	return g_genericBuffer[g_element-1];
 }
 
 /** Funcao : Bluetooth_Unstack
