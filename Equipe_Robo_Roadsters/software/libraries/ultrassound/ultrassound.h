@@ -16,13 +16,20 @@
 /*FIM: ARQUIVOS DE CABE�ALHO*/
 /*=======================================================================================*/
 
+/*INICIO: DEFINES*/
+/*=======================================================================================*/
+
 #define MAX_TIME_ECHO	38		// Tempo máximo de espera do echo, em ms
-#define	ECHO0			8U
-#define ECHO1			2U
-#define TRIG0			7U
-#define TRIG1			4U
+#define	ECHO0			1U
+#define ECHO1			11U
+#define TRIG0			8U
+#define TRIG1			10U
 #define	LOW				0U
 #define	HIGH			1U
+
+/*FIM: DEFINES*/
+/*=======================================================================================*/
+
 
 /** Funcao : Ultrassom_Init
   *
@@ -47,6 +54,42 @@ void Ultrassound_Init(uint8_t trigPin, uint8_t echoPin);
   * Comentarios : Nenhum.
  */
 void Ultrassound_InitRadar(void);
+
+/** Funcao : Ultrassound_FinishRadar
+  *
+  * Descricao : Finaliza as irqs relacionadas ao ultrassom.
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : Vazia.
+  *
+  * Comentarios : Nenhum.
+ */
+void Ultrassound_FinishRadar(void);
+
+/** Funcao : Ultrassound_Measure
+  *
+  * Descricao : Mede a distância de um objeto.
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : Distância do objeto mais próximo.
+  *
+  * Comentarios : Nenhum.
+ */
+uint8_t Ultrassound_Measure(void);
+
+/** Funcao : Ultrassom_EchoTime
+  *
+  * Descricao : Calcula o tempo de nível lógico alto do ECHO.
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : Tempo de nível lógico alto do ECHO.
+  *
+  * Comentarios : Nenhum.
+ */
+uint8_t Ultrassom_EchoTime(void);
 
 
 
