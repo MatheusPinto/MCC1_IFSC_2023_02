@@ -17,7 +17,7 @@
 static volatile pidCtrlHandle_t handleAngulo;
 static volatile pidCtrlHandle_t handleMag;
 static volatile uint8_t objective[2];		// distância de 0 a 255 cm em x e y
-volatile _Bool g_isToRefreshRadar;
+volatile _Bool g_isToRefreshRadar;		//A IRQ diz se ta na hora de varrer o perímetro novamente
 
 
 
