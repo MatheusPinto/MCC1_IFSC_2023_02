@@ -1,12 +1,12 @@
 # 3 IMPLEMENTAÇÃO
 ## 3.1 Hardware
-Devido ao curto período disponível para implementação, a alta complexidade e a densidade do shild, o circuito se tornou a parte crítica do projeto. Inicialmente, optamos por encomendá-lo, no entanto, como o custo seria alto, fomos instruídos a fazer o shild artezanalmente. Como o circuito é dual layaer e possuí alta densidade eletrônica, recebemos apoio da equipe técnica do DAELN (Departamento Academico de Engenharia Eletrônica) para a impressão do circuito com uma CNC. Para evitar a oxidação, a placa foi ariada com palha de aço e posteriormente evernizada. Essa tapa pode ser vista na **figura 1**, juntamente com uma caneta para comparação de escala.
+Devido ao curto período disponível para implementação, a alta complexidade e a densidade do shield, o circuito se tornou a parte crítica do projeto. Inicialmente, optamos por encomendá-lo, no entanto, como o custo seria alto, fomos instruídos a fazer o shield artezanalmente. Como o circuito é dual layaer e possuí alta densidade eletrônica, recebemos apoio da equipe técnica do DAELN (Departamento Academico de Engenharia Eletrônica) para a impressão do circuito com uma CNC. Para evitar a oxidação, a placa foi ariada com palha de aço e posteriormente evernizada. Essa etapa pode ser vista na **figura 1**, juntamente com uma caneta para comparação de escala.
 
-<p align="center"><strong>Figura 1 - Placa de circuito impresso do shild</strong></p>
+<p align="center"><strong>Figura 1 - Placa de circuito impresso do shield</strong></p>
 
 <div align="center">
   
-<img src="imagens/tela_inicial_app.png" width="40%">
+<img src="imagens/shield_placa_impressa.jpg" width="40%">
 
 </div>
 
