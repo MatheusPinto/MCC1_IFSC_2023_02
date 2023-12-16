@@ -20,7 +20,7 @@ O software foi construído abordando, primeiramente, uma metodologia top-down. I
 
 Todos os periféricos implementados (motor, encoder, ultrassom e etc) foram construídos levando em consideração as regras gerais de clean code fornecidas pelo projeto de SDK do KINETIS, logo, foram desenvolvidas bibliotecas para cada periférico com interface para serem aplicadas em cada estado do robô.<p>
 
-Primeiramente, o projeto idealizou 3 modos de operação para o robô, no entanto, dada a dificuldade e o curto período de tempo para desenvolvimento, as metas foram rearranjadas para implementação de apenas o modo de operação **piloto automático** ainda antes do fim do semestre letivo. Dessa forma, foram construídos os arquivos [**automatico.c**](../Equipe_Robo_Roadsters/software/automatico.c) e [**automatico.h**](../Equipe_Robo_Roadsters/software/automatico.h), onde foram desenvolvidos os eventos e funções responsáveis pela operação do carrinho para o respectivo modo de operação. 
+Primeiramente, o projeto idealizou 3 modos de operação para o robô, no entanto, dada a dificuldade e o curto período de tempo para desenvolvimento, as metas foram rearranjadas para implementação de apenas o modo de operação **piloto automático** ainda antes do fim do semestre letivo. Dessa forma, foram construídos os arquivos [automatico.c](../Equipe_Robo_Roadsters/software/automatico.c) e [automatico.h](../Equipe_Robo_Roadsters/software/automatico.h), onde foram desenvolvidos os eventos e funções responsáveis pela operação do carrinho para o respectivo modo de operação. 
 
 Os eventos criados para controle da máquina de estados foram:
 * IsCommandAutomatic;
@@ -31,9 +31,9 @@ Os eventos criados para controle da máquina de estados foram:
 
 Também foram criadas as funções para configuração e operação dos controladores PID para a leitura das coordenadas atuais do carrinho e calculo do erro em relação às coordenadas destinos. No entanto, não foi possível desenvolver as funções do código para interpretar o erro calculado e mandar os sinais para os motores. 
 
-Para a comunicação bluetooth com a interface criada para celulares android foi desenvolvida a biblioteca [bluetooth.h](/software/libraries/bluetooth/bluetooth.h), responsável pela inicialização dos pinos para comunicação UART e também com as funções para leitura dos pinos e para envio das informações para o app.
+Para a comunicação bluetooth com a interface criada para celulares android foi desenvolvida a biblioteca [bluetooth.h](../Equipe_Robo_Roadsters/software/libraries/bluetooth/bluetooth.h), responsável pela inicialização dos pinos para comunicação UART e também com as funções para leitura dos pinos e para envio das informações para o app.
 
-Foi desenvolvido também uma biblioteca [ultrassound.h](/software/libraries/ultrassound/ultrassound.h) para controle e leitura do sensor de obstáculos. Além disso, desenvolvemos os módulos para contole do motor, [motor.h](/software/libraries/motor/motor.h) e o módulo para inicialização e leitura dos encoders das rodas, [encoder.h](/software/libraries/encoder/encoder.h).
+Foi desenvolvido também uma biblioteca [ultrassound.h](../Equipe_Robo_Roadsters/software/libraries/ultrassound/ultrassound.h) para controle e leitura do sensor de obstáculos. Além disso, desenvolvemos os módulos para contole do motor, [motor.h](../Equipe_Robo_Roadsters/software/libraries/motor/motor.h) e o módulo para inicialização e leitura dos encoders das rodas, [encoder.h](../Equipe_Robo_Roadsters/software/libraries/encoder/encoder.h) .
 
 Posteriormente foi verificado que seria necessário tratar as interrupções em um único arquivo, pois os pinos de uma porta compartilhavam o mesmo endereço de interrupção. Dessa forma, seria necessário corrigir este problema nos arquivos desenvolvidos.
 
