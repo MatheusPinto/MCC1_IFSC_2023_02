@@ -39,7 +39,9 @@ Posteriormente foi verificado que seria necessário tratar as interrupções em 
 
 Além disso, não foi possível criar em tempo hábil as funções de odometria para estimativa de posição e cálculo de distância e posição angular em relação às coordenadas de destino.
 
-O arquivo automatico.h/.c também ficou incompleto, visto que sem todos os módulos necessários, não foi feita a integração completa dos arquivos.<p>
+O arquivo automatico.h/.c também ficou incompleto, visto que sem todos os módulos necessários, não foi feita a integração completa dos arquivos.
+
+Devido às dificuldades relatadas não foi possível apresentar o projeto em operação.<p>
 
 <div align="center">
   
