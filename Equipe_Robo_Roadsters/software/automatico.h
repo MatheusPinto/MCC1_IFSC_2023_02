@@ -9,6 +9,35 @@
 #define SOURCES_AUTOMATICO_H_
 
 
+/*ARQUIVOS DE CABE�ALHO*/
+/*=======================================================================================*/
+
+#include "mcu/common.h"
+
+/*FIM: ARQUIVOS DE CABE�ALHO*/
+/*=======================================================================================*/
+
+
+/*INICIO: DEFINES*/
+/*=======================================================================================*/
+
+#define TRUE 	1
+#define FALSE 	0
+#define DISTANCIA_CRITICA	30U
+
+/*FIM: DEFINES*/
+/*=======================================================================================*/
+
+
+/*INICIO: VARIAVEIS COMPARTILHADAS COM A IRQ*/
+/*=======================================================================================*/
+
+extern volatile _Bool g_isToRefreshRadar;
+
+/*FIM: VARIAVEIS COMPARTILHADAS COM A IRQ*/
+/*=======================================================================================*/
+
+
 /*PROTOTIPOS - FUNCOES PUBLICAS*/
 /*=======================================================================================*/
 
@@ -25,7 +54,7 @@
   *
   * Comentarios : Nenhum.
  */
-_Bool Automatico_IsCommandGoBack(void);
+_Bool Automatico_IsCommandAutomatic(void);
 
 /** Funcao : Automatico_IsCommandGoBack
   *
@@ -41,7 +70,7 @@ _Bool Automatico_IsCommandGoBack(void);
 
 /** Funcao : Automatico_IsCoordinatesOk
   *
-  * Descricao : Verifica se coordenadas reais foram passadas && o comando iniciar trajetória foi acionado.
+  * Descricao : Verifica se coordenadas reais foram passadas.
   *
   * Entradas : Vazia
   *
@@ -77,7 +106,7 @@ _Bool Automatico_IsSensorsOk(void);
 
 /** Funcao : Automatico_Obstacles
   *
-  * Descricao : Verifica se há obstáculos via ultrassom.
+  * Descricao : Verifica se há obstáculos a uma distância prédefinida.
   *
   * Entradas : Vazia
   *
@@ -127,7 +156,7 @@ void Automatico_ConfiguraPID(void);
   *
   * Comentarios : Nenhum.
  */
-void Automatico_ControlePID(void);
+void Automatico_ControlePID(uint8_t x, uint8_t y);
 
 /*FIM TRATAMENTO DE EVENTOS DA FSM*/
 /*=======================================================================================*/

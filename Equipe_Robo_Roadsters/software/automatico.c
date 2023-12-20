@@ -2,57 +2,136 @@
  * automatico.c
  *
  *  Created on: 15/11/2023
- *      Author: Bruno Camargo, Cícero Eduardo Dick Junior e Marcelo Zampieri Pereira da Silva
+ *      Author: Bruno Camargo, CÃ­cero Eduardo Dick Junior e Marcelo Zampieri Pereira da Silva
  */
 
-# include "automatico.h"
-# include <stdbool.h>
-# include "pid_ctrl.h"
+#include "automatico.h"
+#include "libraries/pid_ctrl/pid_ctrl.h"
+#include "libraries/ultrassound/ultrassound.h"
+#include "libraries/bluetooth/bluetooth.h"
+#include "libraries/motor/motor.h"
+#include "libraries/encoder/encoder.h"
+#include <stdbool.h>
+#include <stdint.h>
 
 static volatile pidCtrlHandle_t handleAngulo;
 static volatile pidCtrlHandle_t handleMag;
+static volatile uint8_t objective[2];		// distância de 0 a 255 cm em x e y
+volatile _Bool g_isToRefreshRadar;		//A IRQ diz se ta na hora de varrer o perímetro novamente
+
+
 
 // Eventos
 
-// Implementar UART para HC-05
-_Bool IsCommandAutomatic(){
+/** Funcao : Automatico_IsComandAutomatic
+  *
+  * Descricao : Verifica se o comando automatico foi passado via bluetooth.
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : 0 se o comando nao foi passado e !0 caso contrário.
+  *
+  * Comentarios : Nenhum.
+ */
+_Bool Automatico_IsCommandAutomatic(void){
 
-	/*Ler comando no serial Bluetooth*/
-	/*
-	 * Se o comando for = A, retorna verdadeiro
-	 *
-	 * */
+	//Se houver elemento na pilha e for o comando for 'A', desempilha o dado e retorna TRUE;
+	if (Bluetooth_IsThereElement() && Bluetooth_GetElement()=='A'){
+		Bluetooth_Unstack();
+		return TRUE;
+	}
+	return FALSE;
+}
+
+/** Funcao : Automatico_IsCommandGoBack
+  *
+  * Descricao : Verifica se o comando voltar foi passado via bluetooth.
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : 0 se o comando nao foi passado e !0 caso contrário.
+  *
+  * Comentarios : Nenhum.
+ */
+_Bool Automatico_IsCommandGoBack(void){
+
+	//Atualiza a pilha e se houver o comando 'R', desempilha o dado e retorna TRUE;
+	if (Bluetooth_IsThereElement() && Bluetooth_GetElement()=='R') {
+		Bluetooth_Unstack();
+		return TRUE;
+	}
+	return FALSE;
+}
+
+/** Funcao : Automatico_IsCoordinatesOk
+  *
+  * Descricao : Verifica se dados chegaram e, se sim obtem os dados do objetivo
+  *
+  * Entradas : Vazia
+  *
+  * Saidas : 0 se o comando nao foi passado e !0 caso contrário.
+  *
+  * Comentarios : Nenhum.
+ */
+_Bool Automatico_IsCoordinatesOk(void) {
+
+	// Se houver dado na pilha, recebe as coordenadas x,y
+	if (Bluetooth_IsThereElement()) {
+		//Recebe x
+		objective[0] = Bluetooth_GetElement();
+		//Desempilha o x
+		Bluetooth_Unstack();
+		//Espera a coordenada y ser atualizada na pilha e a recebe.
+		while (!Bluetooth_IsThereElement());
+		// Recebe y
+		objective[1] = Bluetooth_GetElement();
+		Bluetooth_Unstack();
+		return TRUE;
+	}
+
+	// Se não, retorna falso
+	else return FALSE;
+}
 
 
+_Bool Automatico_IsOnDestination(){
 
-};
-// Implementar UART para HC-05
-_Bool IsCommandGoBack(){
+	/* Implementar Odometria (Encoders)
+	 * Comparar Objective com localization
+	 */
+}
 
-	/*Ler comando no serial Bluetooth*/
-	/*
-	 * Se o comando for = voltar, retorna verdadeiro
-	 *
-	 * */
+// Implementar Encoders e Ultrassonico
+// Se o objeto estiver a 30cm, retorna verdadeiro
+_Bool Automatico_Obstacles(){
 
+	// se timer de 48ms, atualiza a distância e retorna se objeto está muito perto
+	if (g_isToRefreshRadar){
+		g_isToRefreshRadar = FALSE;
 
-};
-
-
-_Bool IsCoordinatesOk();
-_Bool IsOnDestination(); // Implementar Odometria (Encoders)
-//_Bool IsSensorsOk();	 // Implementar Encoders e Ultrassonico
-_Bool Obstacles();		 // Implementar Ultrassonico
+		uint8_t distancia = Ultrassound_Measure();
+		//Se distancia do objeto menor que uma distancia critica
+		if (distancia<=DISTANCIA_CRITICA) return TRUE;
+	}
+	else return FALSE;
+}
 
 
 // Tratamento de eventos
-void Automatico_DesabilitaSensores(void);
+
+
+void Automatico_DesabilitaSensores(void){
+	/*
+	 * Deve desabilitar interrupções
+	 */
+	Ultrassound_FinishRadar();
+}
 
 
 
 void Automatico_ConfiguraPID(void){
 
-	/*Cria vari�vel de configura��o do controle PID para distancia*/
+	/*Cria variável de configuração do controle PID para distancia*/
 	pidCtrlConfig_t* configMag = CtrlPID_CreateConfig();
 
 	configMag->gainP = 15;
@@ -65,7 +144,7 @@ void Automatico_ConfiguraPID(void){
 	configMag->ErrorI = 0;
 
 
-	/*Cria vari�vel de configura��o do controle PID para angulo*/
+	/*Cria variável de configuração do controle PID para angulo*/
 	pidCtrlConfig_t* configAngulo = CtrlPID_CreateConfig();
 
 	configAngulo->gainP = 15;
@@ -81,8 +160,9 @@ void Automatico_ConfiguraPID(void){
 	handleMag = CtrlPID_Init(configMag);
 	handleAngulo = CtrlPID_Init(configAngulo);
 
+	// Inicia variáveis de controle e contadores do radar ultrassom
+	Ultrassound_InitRadar();
 
-	/*Inicializar Sensor Ultrass�nico*/
 
 };
 
